@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 6 - Var 9(оновлено для таблиці 2, варіант 1)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { color: #0066cc; }
+    .section { margin-bottom: 30px; }
+    .center-top {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+  </style>
+  <script>
+    // Таблиця 1: Функція no_zeros()
+    function no_zeros(arr) {
+      return arr.filter(num => num !== 0);
+    }
+
+    function runNoZeros() {
+      let input = prompt("Введіть числа через кому (наприклад, 1,0,2,0,3)");
+      if (!input) return;
+      let numbers = input.split(",").map(Number);
+      let result = no_zeros(numbers);
+      document.getElementById("result1").innerHTML = "Масив без нулів: " + result.join(", ");
+    }
+
+    // Таблиця 2: Вивід дати у форматі "ДД місяць РРРР, день_неділі"
+    function showFormattedDate() {
+      const months = ["січня", "лютого", "березня", "квітня", "травня", "червня",
+                      "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+      const weekdays = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п’ятниця", "субота"];
+      
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const weekday = weekdays[now.getDay()];
+      
+      const formatted = `${day} ${month} ${year}, ${weekday}`;
+      document.getElementById("result2").innerText = formatted;
+    }
+
+    // Таблиця 3: Перевірка номера телефону
+    function validatePhone() {
+      const phone = document.getElementById("phone").value;
+      const regex = /^\+38\(\d{3}\)\d{3}-\d{2}-\d{1}$/;
+      const resultText = regex.test(phone)
+        ? "Формат телефону правильний"
+        : "Неправильний формат телефону";
+      document.getElementById("result3").innerHTML = resultText;
+    }
+
+    // Вивести дату після завантаження
+    window.onload = showFormattedDate;
+  </script>
+</head>
+<body>
+
+  <div class="center-top">
+    <h2 id="result2"></h2>
+  </div>
+
+  <h1 style="margin-top: 80px;">Лабораторна робота №6 — Варіант 9</h1>
+
+  <div class="section">
+    <h2>1. Видалення нулів з масиву (функція no_zeros)</h2>
+    <button onclick="runNoZeros()">Виконати</button>
+    <p id="result1"></p>
+  </div>
+
+  <div class="section">
+    <h2>3. Перевірка формату телефону</h2>
+    <input type="text" id="phone" placeholder="+38(067)123-45-6">
+    <button onclick="validatePhone()">Перевірити</button>
+    <p id="result3"></p>
+  </div>
+
+</body>
+</html>
